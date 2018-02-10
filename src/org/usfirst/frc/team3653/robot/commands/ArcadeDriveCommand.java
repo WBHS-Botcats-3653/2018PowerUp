@@ -28,15 +28,7 @@ public class ArcadeDriveCommand extends Command
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute()
 	{
-		if (m_oi.getShift())
-		{
-			// TODO: Shift to high gear
-		}
-		else
-		{
-			// TODO: Shift to low gear
-		}
-
+		m_drive.shift(m_oi.getShift());
 		m_drive.arcadeDrive(m_oi.getThrottle(), m_oi.getSteering());
 	}
 

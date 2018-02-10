@@ -1,14 +1,17 @@
 package org.usfirst.frc.team3653.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 
 import org.usfirst.frc.team3653.robot.RobotMap;
 import org.usfirst.frc.team3653.robot.commands.ArcadeDriveCommand;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+
 
 
 /**
@@ -17,9 +20,10 @@ import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 public class Drive extends Subsystem
 {
 	private static Drive m_singleton = null;
-	private Talon m_leftDrive, m_rightDrive;
+	private Victor m_leftDrive, m_rightDrive;
 	private DifferentialDrive m_drive;
 	private ADXRS450_Gyro m_gyro;
+	private DoubleSolenoid m_transmition;
 	private AnalogInput m_encoder;
 	private int m_encoder0;
 	// Put methods for controlling this subsystem
@@ -33,10 +37,11 @@ public class Drive extends Subsystem
 
 	private Drive()
 	{
-		m_rightDrive = new Talon (RobotMap.rightDriveMotor);
-		m_leftDrive = new Talon (RobotMap.leftDriveMotor);
+		m_rightDrive = new Victor (RobotMap.rightDriveMotor);
+		m_leftDrive = new Victor (RobotMap.leftDriveMotor);
 		m_drive = new DifferentialDrive (m_leftDrive,m_rightDrive);
 		m_gyro = new ADXRS450_Gyro(RobotMap.gyro_port);
+		m_transmition = new DoubleSolenoid(RobotMap.shiftFC,RobotMap.shiftRC);
 		m_encoder = new AnalogInput(RobotMap.encoder_channel);
 		m_encoder0 = 0;
 
@@ -63,6 +68,10 @@ public class Drive extends Subsystem
 	public void arcadeDrive(double xSpeed, double zRotation)
 	{
 		m_drive.arcadeDrive(xSpeed, zRotation);
+	}
+	public void shift(boolean up)
+	{
+		m_transmition.set(up ? Value.kForward : Value.kReverse);
 	}
 
 	public static Drive getInstance()

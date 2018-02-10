@@ -22,4 +22,8 @@ public class RobotMap {
 	public static int rightDriveMotor = 3;
 	public static SPI.Port gyro_port = SPI.Port.kOnboardCS0;
 	public static int encoder_channel = 0;
+	// vvv these are the transmitions for shifting gears for the drive vvv
+	public static int shiftFC = 0; //forward channel
+	public static int shiftRC = 1; //reverse channel
+	
 }
