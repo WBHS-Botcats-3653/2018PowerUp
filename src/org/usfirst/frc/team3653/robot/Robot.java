@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 //import org.usfirst.frc.team3653.robot.commands.ExampleCommand;
 import org.usfirst.frc.team3653.robot.subsystems.Drive;
 import org.usfirst.frc.team3653.robot.subsystems.Elevator;
+import org.usfirst.frc.team3653.robot.subsystems.Intake;
 import org.usfirst.frc.team3653.robot.commands.AutoCommand;
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -30,6 +31,7 @@ public class Robot extends IterativeRobot {
 	private Drive m_drive =  null;
 	private Compressor m_compressor = null;
 	private Elevator m_elevator = null;
+	private Intake m_intake = null;
 
 	SendableChooser<Character> m_positionChooser = null;
 	SendableChooser<Character> m_scaleChooser = null;
@@ -43,6 +45,7 @@ public class Robot extends IterativeRobot {
 		m_oi = OI.getInstance();
 		m_drive = Drive.getInstance();
 		m_elevator = Elevator.getInstance();
+		m_intake = Intake.getInstance();
 		m_positionChooser = new SendableChooser<>();
 		m_scaleChooser = new SendableChooser<>();
 		m_compressor = new Compressor(RobotMap.pcmCanCompressor);

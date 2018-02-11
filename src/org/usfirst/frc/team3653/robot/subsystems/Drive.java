@@ -1,7 +1,7 @@
 package org.usfirst.frc.team3653.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -18,7 +18,7 @@ import org.usfirst.frc.team3653.robot.commands.ArcadeDriveCommand;
 public class Drive extends Subsystem
 {
 	private static Drive m_singleton = null;
-	private Victor m_leftDrive, m_rightDrive;
+	private VictorSP m_leftDrive, m_rightDrive;
 	private DifferentialDrive m_drive;
 	private ADXRS450_Gyro m_gyro;
 	private DoubleSolenoid m_transmition;
@@ -35,8 +35,8 @@ public class Drive extends Subsystem
 
 	private Drive()
 	{
-		m_rightDrive = new Victor(RobotMap.pwmRightDriveMotor);
-		m_leftDrive = new Victor(RobotMap.pwmLeftDriveMotor);
+		m_rightDrive = new VictorSP(RobotMap.pwmRightDriveMotor);
+		m_leftDrive = new VictorSP(RobotMap.pwmLeftDriveMotor);
 		m_rightDrive.setInverted(true);
 		m_leftDrive.setInverted(true);
 		m_drive = new DifferentialDrive(m_leftDrive, m_rightDrive);

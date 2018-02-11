@@ -56,13 +56,14 @@ public class AutoCommand extends CommandGroup
 	{
 		// Values are temporary and aren't the real distances.
 		int leftRight = (turn == 'R') ? 1 : -1;
+		// needes some kind of output system lowerer(the numatics)
 		addSequential(new DriveCommand(1 * 12));
 		addSequential(new TurnCommand(leftRight * 30));
 		addSequential(new DriveCommand(1 * 12));
 		addSequential(new TurnCommand(leftRight * (-30)));
 		addSequential(new DriveCommand(1 * 12));
-
-		// Here is where the release command should be (box output).
+		// some sort of elevator up
+		addSequential(new OutputCommand(1));
 		addSequential(new DriveCommand(-1 * 12));
 		addSequential(new TurnCommand(leftRight * 30));
 		addSequential(new DriveCommand(1 * 12));

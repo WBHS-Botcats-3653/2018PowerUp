@@ -45,6 +45,36 @@ public class OI {
 		return m_controller.getTriggerAxis(GenericHID.Hand.kLeft) < 0.5 ? false : true;
 	}
 
+	public double getLift()
+	{
+		double ret_value = 0.0;
+		double trigger = m_controller.getTriggerAxis(GenericHID.Hand.kRight);
+		if(trigger > 0.1)
+		{
+			ret_value = trigger;
+		}
+		else if(m_controller.getBumper(GenericHID.Hand.kRight))
+		{
+			ret_value = -0.5;
+		}
+		
+		return ret_value;
+	}
+	public double getIntake()
+	{
+		double ret_value = 0.0;
+		if(m_controller.getXButton())
+		{
+			// input
+			ret_value = -1;
+		}
+		else if(m_controller.getYButton())
+		{
+			//output
+			ret_value = 1;
+		}
+		return ret_value;
+	}
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
 	//// joystick.
