@@ -1,43 +1,35 @@
-package org.usfirst.frc.team3653.robot.commands;
+package org.usfirst.frc.team3653.robot.subsystems;
 
-import org.usfirst.frc.team3653.robot.subsystems.Drive;
+import org.usfirst.frc.team3653.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
  */
-public class Elevator extends Command {
+public class Elevator extends Subsystem
+{
+    private static Elevator m_singleton = null;
+    private Victor m_elevatorMotor;
+    private DigitalInput m_upperLimit;
+    private DigitalInput m_lowerLimit;
 
-	private static Elevator m_singleton = null;
-    private Elevator() 
+    private Elevator()
     {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+    	m_elevatorMotor = new Victor (RobotMap.pwmElevatorMotor);
+    	m_upperLimit = new DigitalInput(RobotMap.dioElevatorUpper);
+    	m_lowerLimit = new DigitalInput(RobotMap.dioElevatorLower);
     }
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
+    public void initDefaultCommand()
+    {
+        // Set the default command for a subsystem here.
+        //setDefaultCommand(new MySpecialCommand());
     }
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    }
-
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return false;
-    }
-
-    // Called once after isFinished returns true
-    protected void end() {
-    }
-
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    }
-    public static Elevator getInstance()
+	public static Elevator getInstance()
 	{
 		if(m_singleton ==  null)
 		{
@@ -46,3 +38,4 @@ public class Elevator extends Command {
 		return m_singleton;
 	}
 }
+

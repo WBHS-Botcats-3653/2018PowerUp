@@ -12,8 +12,6 @@ import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import org.usfirst.frc.team3653.robot.RobotMap;
 import org.usfirst.frc.team3653.robot.commands.ArcadeDriveCommand;
 
-
-
 /**
  *
  */
@@ -29,32 +27,42 @@ public class Drive extends Subsystem
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 
-	public void initDefaultCommand() 
+	public void initDefaultCommand()
 	{
 		// Set the default command for a subsystem here.
-		setDefaultCommand( new ArcadeDriveCommand() );
+		setDefaultCommand(new ArcadeDriveCommand());
 	}
 
 	private Drive()
 	{
-		m_rightDrive = new Victor (RobotMap.rightDriveMotor);
-		m_leftDrive = new Victor (RobotMap.leftDriveMotor);
-		m_drive = new DifferentialDrive (m_leftDrive,m_rightDrive);
-		m_gyro = new ADXRS450_Gyro(RobotMap.gyro_port);
-		m_transmition = new DoubleSolenoid(RobotMap.shiftFC,RobotMap.shiftRC);
-		m_encoder = new AnalogInput(RobotMap.encoder_channel);
+		m_rightDrive = new Victor(RobotMap.pwmRightDriveMotor);
+		m_leftDrive = new Victor(RobotMap.pwmLeftDriveMotor);
+		m_rightDrive.setInverted(true);
+		m_leftDrive.setInverted(true);
+		m_drive = new DifferentialDrive(m_leftDrive, m_rightDrive);
+		m_gyro = new ADXRS450_Gyro(RobotMap.spiGyroPort);
+		m_transmition = new DoubleSolenoid(RobotMap.pcmCanShift, RobotMap.pcmFCShift, RobotMap.pcmRCShift);
+		m_encoder = new AnalogInput(RobotMap.adcEncoderChannel);
 		m_encoder0 = 0;
 
 		SmartDashboard.putData("Gyro", m_gyro);
 	}
+
+	private int getRawEncoder()
+	{
+		return m_encoder.getValue();
+	}
+
 	public int getEncoder()
 	{
-		return m_encoder.getValue() - m_encoder0;
+		return getRawEncoder() - m_encoder0;
 	}
+
 	public void resetEncoder()
 	{
-		m_encoder0 = m_encoder.getValue();
+		m_encoder0 = getRawEncoder();
 	}
+
 	public double getAngle()
 	{
 		return m_gyro.getAngle();
@@ -69,6 +77,7 @@ public class Drive extends Subsystem
 	{
 		m_drive.arcadeDrive(xSpeed, zRotation);
 	}
+
 	public void shift(boolean up)
 	{
 		m_transmition.set(up ? Value.kForward : Value.kReverse);
@@ -76,7 +85,7 @@ public class Drive extends Subsystem
 
 	public static Drive getInstance()
 	{
-		if(m_singleton ==  null)
+		if (m_singleton == null)
 		{
 			m_singleton = new Drive();
 		}

@@ -15,13 +15,15 @@ public class AutoCommand extends CommandGroup
 	private char m_scale;
 	private char m_theirSwitch;
 
-	public AutoCommand(char start_pos,String fieldString) 
+	// 'S' or 'C'
+	private char m_scaleAction;
+	public AutoCommand(char start_pos, char scaleAction,String fieldString) 
 	{
 		m_position = start_pos;
+		m_scaleAction = scaleAction;
 		m_mySwitch = fieldString.charAt(0);
 		m_scale = fieldString.charAt(1);
 		m_theirSwitch = fieldString.charAt(2);
-		int leftRight;
 
 		addSequential(new DriveCommand(-5*12));
 		/*
@@ -31,22 +33,57 @@ public class AutoCommand extends CommandGroup
 		
 		if(m_position == 'C')
 		{
-			//values are temporary and arnt the real distances.
-			leftRight = (m_mySwitch =='R') ?  1 :  -1;
-			addSequential(new DriveCommand(5*12));
-			addSequential(new TurnCommand(leftRight*30));
-			addSequential(new DriveCommand(5*12));
-			addSequential(new TurnCommand(leftRight*(-30)));
-			addSequential(new DriveCommand(5*12));
-			//here is where the relese comand should be (box output)
-			addSequential(new DriveCommand(-5*12));
-			addSequential(new TurnCommand(leftRight*30));
-			addSequential(new DriveCommand(5*12));
-			addSequential(new TurnCommand(leftRight*(-30)));
-			addSequential(new DriveCommand(5*12));
+			//starting in center. only option is switch
+			placeSwitch(m_mySwitch);
+		}
+		else if(m_position == m_scale)
+		{
+			//means scale is on our starting side
+			placeScaleEasy(m_position);
+		}
+		else if(m_scaleAction == 'S')
+		{
+			//this is if we want to plat it safe and not cross the feild for scale
+			crossLine();
+		}
+		else
+		{
+			placeScaleCross(m_position);
 		}
 	}
+	
+	private void placeSwitch(char turn)
+	{
+		// Values are temporary and aren't the real distances.
+		int leftRight = (turn == 'R') ? 1 : -1;
+		addSequential(new DriveCommand(1 * 12));
+		addSequential(new TurnCommand(leftRight * 30));
+		addSequential(new DriveCommand(1 * 12));
+		addSequential(new TurnCommand(leftRight * (-30)));
+		addSequential(new DriveCommand(1 * 12));
 
+		// Here is where the release command should be (box output).
+		addSequential(new DriveCommand(-1 * 12));
+		addSequential(new TurnCommand(leftRight * 30));
+		addSequential(new DriveCommand(1 * 12));
+		addSequential(new TurnCommand(leftRight * (-30)));
+		addSequential(new DriveCommand(1 * 12));
+	}
+	
+	private void placeScaleEasy(char start)
+	{
+		
+	}
+	
+	private void placeScaleCross(char start)
+	{
+		
+	}
+	
+	private void crossLine()
+	{
+		addSequential(new DriveCommand(5 * 12));
+	}
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() 

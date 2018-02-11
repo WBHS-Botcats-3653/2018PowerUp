@@ -2,6 +2,7 @@ package org.usfirst.frc.team3653.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team3653.robot.subsystems.Drive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -67,7 +68,7 @@ public class DriveCommand extends Command {
 	protected boolean isFinished() 
 	{
 		double currentDistance =(m_revs + (double)m_currentVal/m_maxVal)* Math.PI*m_diameter;
-		System.out.println(currentDistance);
+		SmartDashboard.putNumber("distance",currentDistance);
 		
 		if( Math.abs(m_distance) - Math.abs(currentDistance)  <= 0 )
 		{

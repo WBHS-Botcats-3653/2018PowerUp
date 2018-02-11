@@ -31,8 +31,8 @@ public class Robot extends IterativeRobot {
 	private Compressor m_compressor = null;
 	private Elevator m_elevator = null;
 
-	SendableChooser<Character> m_chooser = null;
-
+	SendableChooser<Character> m_positionChooser = null;
+	SendableChooser<Character> m_scaleChooser = null;
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -43,15 +43,20 @@ public class Robot extends IterativeRobot {
 		m_oi = OI.getInstance();
 		m_drive = Drive.getInstance();
 		m_elevator = Elevator.getInstance();
-		m_chooser = new SendableChooser<>();
-		m_compressor = new Compressor();
+		m_positionChooser = new SendableChooser<>();
+		m_scaleChooser = new SendableChooser<>();
+		m_compressor = new Compressor(RobotMap.pcmCanCompressor);
 
-		m_chooser.addObject("Left", new Character('L'));
-		m_chooser.addDefault("Center", new Character('C'));
-		m_chooser.addObject("Right", new Character('R'));
+		m_positionChooser.addObject("Left", new Character('L'));
+		m_positionChooser.addDefault("Center", new Character('C'));
+		m_positionChooser.addObject("Right", new Character('R'));
+		
+		m_scaleChooser.addDefault("Safe", new Character('S'));
+		m_scaleChooser.addObject("Cross", new Character('C'));
 		m_compressor.setClosedLoopControl(true);
 
-		SmartDashboard.putData("Start Position", m_chooser);
+		SmartDashboard.putData("Start Position", m_positionChooser);
+		SmartDashboard.putData("Scale Action", m_scaleChooser);
 		//SmartDashboard.putData("Scheduler", Scheduler.getInstance());
 		SmartDashboard.putData("Drive", Drive.getInstance());
 	}
@@ -88,9 +93,11 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit()
 	{
-		Character c = m_chooser.getSelected();
+		Character c = m_positionChooser.getSelected();
+		Character s = m_scaleChooser.getSelected();
 		autonomousCommand = new AutoCommand(
 				c.charValue(),
+				s.charValue(),
 				DriverStation.getInstance().getGameSpecificMessage() );
 		m_compressor.setClosedLoopControl(true);
 		// schedule the autonomous command (example)

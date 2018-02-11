@@ -36,7 +36,8 @@ public class OI {
 
 	public double getSteering()
 	{
-		return m_controller.getX(GenericHID.Hand.kRight);
+		//its negative because the getX was inverted
+		return -m_controller.getX(GenericHID.Hand.kRight);
 	}
 
 	public boolean getShift()

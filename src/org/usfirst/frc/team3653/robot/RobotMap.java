@@ -18,12 +18,23 @@ public class RobotMap {
 	// number and the module. For example you with a rangefinder:
 	// public static int rangefinderPort = 1;
 	// public static int rangefinderModule = 1;
-	public static int leftDriveMotor = 2;
-	public static int rightDriveMotor = 3;
-	public static SPI.Port gyro_port = SPI.Port.kOnboardCS0;
-	public static int encoder_channel = 0;
-	// vvv these are the transmitions for shifting gears for the drive vvv
-	public static int shiftFC = 0; //forward channel
-	public static int shiftRC = 1; //reverse channel
+	public static int pwmLeftDriveMotor = 6;
+	public static int pwmRightDriveMotor = 7;
+	public static int pwmElevatorMotor = 0;
+	public static int pwmIntakeMotor = 1;
+	public static int pwmClimbMotor = 2;
+	
+	public static SPI.Port spiGyroPort = SPI.Port.kOnboardCS0;
+	
+	public static int adcEncoderChannel = 0;
+	
+	public static int pcmCanCompressor = 0;
+	// vvv these are the transmissions for shifting gears for the drive vvv
+	public static int pcmCanShift = 0;
+	public static int pcmFCShift = 0; //forward channel
+	public static int pcmRCShift = 1; //reverse channel
+	
+	public static int dioElevatorUpper = 0;
+	public static int dioElevatorLower = 1;
 	
 }
