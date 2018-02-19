@@ -55,10 +55,16 @@ public class OI {
 		}
 		else if(m_controller.getBumper(GenericHID.Hand.kRight))
 		{
-			ret_value = -0.5;
+			ret_value = -0.1;
 		}
 		
 		return ret_value;
+	}
+	
+	public void rumble(double rumbleVal)
+	{
+		m_controller.setRumble(GenericHID.RumbleType.kLeftRumble , rumbleVal);
+		m_controller.setRumble(GenericHID.RumbleType.kRightRumble , rumbleVal);
 	}
 	public double getIntake()
 	{
@@ -74,6 +80,16 @@ public class OI {
 			ret_value = 1;
 		}
 		return ret_value;
+	}
+	public double getClimber()
+	{
+		double ret_valueClimber = 0.0;
+		if(m_controller.getAButton())
+		{
+			ret_valueClimber = 0.25;
+		}
+		
+		return ret_valueClimber;
 	}
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a

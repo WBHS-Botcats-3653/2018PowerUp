@@ -20,7 +20,6 @@ public class RobotMap {
 	// public static int rangefinderModule = 1;
 	public static int pwmLeftDriveMotor = 6;
 	public static int pwmRightDriveMotor = 7;
-	public static int pwmElevatorMotor = 0;
 	public static int pwmIntakeMotor = 1;
 	public static int pwmClimbMotor = 2;
 	
@@ -28,7 +27,7 @@ public class RobotMap {
 	
 	public static int adcEncoderChannel = 0;
 	
-	public static int pcmCanCompressor = 0;
+	public static int pcmCanCompressor = 2;
 	// vvv these are the transmissions for shifting gears for the drive vvv
 	public static int pcmCanShift = 1;
 	public static int pcmFCShift = 0; //forward channel
@@ -41,4 +40,6 @@ public class RobotMap {
 	public static int dioElevatorUpper = 0;
 	public static int dioElevatorLower = 1;
 	
+	public static int canElevatorMotorMaster = 9;
+	public static int canElevatorMotorSlave = 10;
 }

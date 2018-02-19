@@ -1,46 +1,36 @@
 package org.usfirst.frc.team3653.robot.commands;
 
 import org.usfirst.frc.team3653.robot.OI;
-import org.usfirst.frc.team3653.robot.subsystems.Elevator;
+import org.usfirst.frc.team3653.robot.subsystems.Climber;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ArcadeLiftCommand extends Command 
-{
-	private OI m_oi = null;
-	private Elevator m_elevator = null;
+public class ArcadeClimbCommand extends Command {
 
-    public ArcadeLiftCommand() 
+	private OI m_oi = null;
+	private Climber m_climber = null;
+	
+    public ArcadeClimbCommand() 
     {
     	m_oi = OI.getInstance();
-		m_elevator = Elevator.getInstance();
-
-		requires( m_elevator );
+		m_climber = Climber.getInstance();
+		
+		requires( m_climber );
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
-    protected void initialize() 
-    {
-    	
+    protected void initialize() {
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() 
     {
-    	//m_elevator.shift(m_oi.getShift());
-    	if( m_elevator.lift(m_oi.getLift()) )
-    	{
-    		m_oi.rumble(1);
-    	}
-    	else
-    	{
-    		m_oi.rumble(0);
-    	}
+    	m_climber.climber(m_oi.getClimber());
     }
 
     // Make this return true when this Command no longer needs to run execute()

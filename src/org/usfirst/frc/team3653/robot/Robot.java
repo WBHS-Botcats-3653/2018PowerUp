@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import org.usfirst.frc.team3653.robot.subsystems.Drive;
 import org.usfirst.frc.team3653.robot.subsystems.Elevator;
 import org.usfirst.frc.team3653.robot.subsystems.Intake;
+import org.usfirst.frc.team3653.robot.subsystems.Climber;
 import org.usfirst.frc.team3653.robot.commands.AutoCommand;
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -31,6 +32,7 @@ public class Robot extends IterativeRobot {
 	private Drive m_drive =  null;
 	private Compressor m_compressor = null;
 	private Elevator m_elevator = null;
+	private Climber m_climber = null;
 	private Intake m_intake = null;
 
 	SendableChooser<Character> m_positionChooser = null;
@@ -46,6 +48,7 @@ public class Robot extends IterativeRobot {
 		m_drive = Drive.getInstance();
 		m_elevator = Elevator.getInstance();
 		m_intake = Intake.getInstance();
+		m_climber = Climber.getInstance();
 		m_positionChooser = new SendableChooser<>();
 		m_scaleChooser = new SendableChooser<>();
 		m_compressor = new Compressor(RobotMap.pcmCanCompressor);
@@ -96,6 +99,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit()
 	{
+		
 		Character c = m_positionChooser.getSelected();
 		Character s = m_scaleChooser.getSelected();
 		autonomousCommand = new AutoCommand(
@@ -108,6 +112,7 @@ public class Robot extends IterativeRobot {
 		{
 			autonomousCommand.start();
 		}
+		m_elevator.resetPosition();
 	}
 
 	/**
@@ -132,6 +137,7 @@ public class Robot extends IterativeRobot {
 		{
 			autonomousCommand.cancel();
 		}
+		m_elevator.resetPosition();
 	}
 
 	/**
@@ -149,6 +155,14 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void testPeriodic()
 	{
+		if(m_elevator.isUpperLimit())
+		{
+			System.out.println("its close");
+		}
+		else
+		{
+			System.out.println("far");
+		}
 		//LiveWindow.run();
 	}
 }
