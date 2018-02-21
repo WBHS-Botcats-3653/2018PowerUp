@@ -33,6 +33,8 @@ public class RobotMap {
 	public static int pcmFCShift = 0; //forward channel
 	public static int pcmRCShift = 1; //reverse channel
 	
+	public static int pcmHook = 2; //for climbing
+	
 	public static int pcmCanIntakeArm = 1;
 	public static int pcmFCIntakeArm = 2; //forward channel
 	public static int pcmRCIntakeArm = 3; //reverse channel
@@ -40,6 +42,6 @@ public class RobotMap {
 	public static int dioElevatorUpper = 0;
 	public static int dioElevatorLower = 1;
 	
-	public static int canElevatorMotorMaster = 9;
-	public static int canElevatorMotorSlave = 10;
+	public static int canElevatorMotorMaster = 10;
+	public static int canElevatorMotorSlave = 9;
 }

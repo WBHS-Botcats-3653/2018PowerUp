@@ -1,24 +1,23 @@
 package org.usfirst.frc.team3653.robot.commands;
 
-import org.usfirst.frc.team3653.robot.OI;
-import org.usfirst.frc.team3653.robot.subsystems.Intake;
-
 import edu.wpi.first.wpilibj.command.Command;
+
+import org.usfirst.frc.team3653.robot.subsystems.Elevator;
+import org.usfirst.frc.team3653.robot.subsystems.Intake;
 
 /**
  *
  */
-public class ArcadeIntakeCommand extends Command 
-{
-	private OI m_oi = null;
-	private Intake m_intake = null;
+public class LiftCommand extends Command {
 
-    public ArcadeIntakeCommand() 
+	private final Elevator m_elevator;
+	private double m_height;
+	
+    public LiftCommand( double height) 
     {
-    	m_oi = OI.getInstance();
-		m_intake = Intake.getInstance();
-		
-		requires( m_intake );
+    	m_elevator = Elevator.getInstance();
+    	m_height = height;
+		requires(m_elevator);
     }
 
     // Called just before this Command runs the first time
@@ -29,19 +28,19 @@ public class ArcadeIntakeCommand extends Command
     // Called repeatedly when this Command is scheduled to run
     protected void execute() 
     {
-    	m_intake.deployAndStow(m_oi.getIntakeDAS());
-    	m_intake.intake(m_oi.getIntake());
+    	m_elevator.lift(0.5);
     }
 
     // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished()
+    protected boolean isFinished() 
     {
-        return false;
+        return m_height > m_elevator.getPosition();
     }
 
     // Called once after isFinished returns true
-    protected void end()
+    protected void end() 
     {
+    	
     }
 
     // Called when another command which requires one or more of the same

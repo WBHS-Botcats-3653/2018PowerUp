@@ -1,6 +1,5 @@
 package org.usfirst.frc.team3653.robot;
 
-//import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID;
 
@@ -11,13 +10,14 @@ import edu.wpi.first.wpilibj.GenericHID;
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
-public class OI {
+public class OI
+{
 	private static OI m_singleton = null;
-	private XboxController m_controller;
+	private XboxController m_controller = null;
 
 	private OI()
 	{
-		m_controller = new XboxController (0);
+		m_controller = new XboxController( 0 );
 	}
 
 	public static OI getInstance()
@@ -44,11 +44,25 @@ public class OI {
 	{
 		return m_controller.getTriggerAxis(GenericHID.Hand.kLeft) < 0.5 ? false : true;
 	}
+	
+	public boolean getIntakeDAS()
+	{
+		return m_controller.getBButton();
+	}
+	
+	public boolean getHook()
+	{
+		return m_controller.getBumper(GenericHID.Hand.kLeft);
+	}
 
 	public double getLift()
 	{
 		double ret_value = 0.0;
 		double trigger = m_controller.getTriggerAxis(GenericHID.Hand.kRight);
+
+		/* Slow down the lift */
+		//trigger *= 0.75;
+
 		if(trigger > 0.1)
 		{
 			ret_value = trigger;
@@ -66,6 +80,7 @@ public class OI {
 		m_controller.setRumble(GenericHID.RumbleType.kLeftRumble , rumbleVal);
 		m_controller.setRumble(GenericHID.RumbleType.kRightRumble , rumbleVal);
 	}
+
 	public double getIntake()
 	{
 		double ret_value = 0.0;
@@ -81,12 +96,13 @@ public class OI {
 		}
 		return ret_value;
 	}
+
 	public double getClimber()
 	{
 		double ret_valueClimber = 0.0;
 		if(m_controller.getAButton())
 		{
-			ret_valueClimber = 0.25;
+			ret_valueClimber = 1;
 		}
 		
 		return ret_valueClimber;

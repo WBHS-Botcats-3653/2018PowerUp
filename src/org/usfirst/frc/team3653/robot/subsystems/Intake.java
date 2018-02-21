@@ -32,7 +32,9 @@ public class Intake extends Subsystem
         //setDefaultCommand(new MySpecialCommand());
     }
     
-    public void deploy()
+    // I didnt know if it was set up like this for a reason
+    // so i just comented it out
+    /*public void deploy()
     {
     	m_armCtrl.set(Value.kForward);
     }
@@ -40,7 +42,12 @@ public class Intake extends Subsystem
     public void stow()
     {
     	m_armCtrl.set(Value.kReverse);
-    }
+    }*/
+    
+    public void deployAndStow(boolean up)
+   	{
+   		m_armCtrl.set(up ? Value.kReverse : Value.kForward);
+   	}
     
     public void intake(double speed)
     {

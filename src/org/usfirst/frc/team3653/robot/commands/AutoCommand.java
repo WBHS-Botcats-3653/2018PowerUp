@@ -62,7 +62,8 @@ public class AutoCommand extends CommandGroup
 		addSequential(new DriveCommand(1 * 12));
 		addSequential(new TurnCommand(leftRight * (-30)));
 		addSequential(new DriveCommand(1 * 12));
-		// some sort of elevator up
+		addSequential(new LiftCommand(2 * 12));
+		// some sort of elevator up (done ... maybe)
 		addSequential(new OutputCommand(1));
 		addSequential(new DriveCommand(-1 * 12));
 		addSequential(new TurnCommand(leftRight * 30));
@@ -73,6 +74,48 @@ public class AutoCommand extends CommandGroup
 	
 	private void placeScaleEasy(char start)
 	{
+		/*
+		int leftRight = (turn == 'R') ? 1 : -1;
+		addSequential(new DriveCommand(1.5 * 12));
+		addSequential(new TurnCommand(leftRight * 45));
+		addSequential(new DriveCommand(2 * 12));
+		addSequential(new TurnCommand(leftRight * (-45)));
+		addSequential(new DriveCommand(8 * 12));
+		addSequential(new TurnCommand(leftRight * (-45)));
+		addSequential(new DriveCommand(1 * 12));
+		addSequential(new TurnCommand(leftRight * (-45)));
+		addSequential(new LiftCommand(6 * 12));
+		// some sort of elevator up (done ... maybe)
+		addSequential(new OutputCommand(1));
+		addSequential(new DriveCommand(-1.5 * 12));
+		addParallel(new OutputCommand(1));
+		addSequential(new TurnCommand(leftRight * (90)));
+		
+		
+		addSequential(new DriveCommand(-1 * 12));
+		addSequential(new TurnCommand(leftRight * 30));
+		addSequential(new DriveCommand(1 * 12));
+		addSequential(new TurnCommand(leftRight * (-30)));
+		addSequential(new DriveCommand(1 * 12));
+		// vroom vroom
+		 */
+		
+		/*
+		int leftRight = (turn == 'R') ? 1 : -1;
+		addSequential(new DriveCommand(1 * 12));
+		addSequential(new TurnCommand(leftRight * 30));
+		addSequential(new DriveCommand(1 * 12));
+		addSequential(new TurnCommand(leftRight * (-30)));
+		addSequential(new DriveCommand(1 * 12));
+		addSequential(new LiftCommand(2 * 12));
+		// some sort of elevator up (done ... maybe)
+		addSequential(new OutputCommand(1));
+		addSequential(new DriveCommand(-1 * 12));
+		addSequential(new TurnCommand(leftRight * 30));
+		addSequential(new DriveCommand(1 * 12));
+		addSequential(new TurnCommand(leftRight * (-30)));
+		addSequential(new DriveCommand(1 * 12));
+		 */
 		
 	}
 	

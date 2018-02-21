@@ -17,15 +17,15 @@ public class Elevator extends Subsystem
     private static Elevator m_singleton = null;
     private WPI_TalonSRX m_elevatorMotorMaster;
     private WPI_TalonSRX m_elevatorMotorSlave;
-    private DigitalInput m_upperLimit;
-    private DigitalInput m_lowerLimit;
+    //private DigitalInput m_upperLimit;
+    //private DigitalInput m_lowerLimit;
 
     private Elevator()
     {
     	m_elevatorMotorMaster = new WPI_TalonSRX (RobotMap.canElevatorMotorMaster);
     	m_elevatorMotorSlave = new WPI_TalonSRX (RobotMap.canElevatorMotorSlave);
-    	m_upperLimit = new DigitalInput(RobotMap.dioElevatorUpper);
-    	m_lowerLimit = new DigitalInput(RobotMap.dioElevatorLower);
+    	//m_upperLimit = new DigitalInput(RobotMap.dioElevatorUpper);
+    	//m_lowerLimit = new DigitalInput(RobotMap.dioElevatorLower);
     	
     	m_elevatorMotorSlave.follow(m_elevatorMotorMaster);
 
@@ -63,7 +63,8 @@ public class Elevator extends Subsystem
     {
     	return false; //m_lowerLimit.get();
     }
-	public static Elevator getInstance()
+
+    public static Elevator getInstance()
 	{
 		if(m_singleton ==  null)
 		{
@@ -76,6 +77,7 @@ public class Elevator extends Subsystem
 	{
 		m_elevatorMotorMaster.setSelectedSensorPosition(0, 0, 0);
 	}
+
 	public double getPosition( )
 	{
 		final double distPerCount = ( 1.756 * Math.PI ) / (2.083 * 4096 );
