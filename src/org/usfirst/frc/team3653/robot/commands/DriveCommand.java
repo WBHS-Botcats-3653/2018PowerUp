@@ -17,8 +17,8 @@ public class DriveCommand extends Command {
 	private int m_revs;
 	private int m_previousVal;
 	private int m_currentVal;
-	
-	public DriveCommand(double distance, double speed) 
+
+	public DriveCommand(double distance, double speed)
 	{
 		super( "Drive " + (int)distance );
 		m_distance = distance;
@@ -26,27 +26,27 @@ public class DriveCommand extends Command {
 		//m_direction = distance > 0 ? +1 : -1;
 		m_drive = Drive.getInstance();
 		requires(m_drive);
-		
+
 	}
-	public DriveCommand(double distance) 
+	public DriveCommand(double distance)
 	{
 		this(distance,m_defaultSpeed);
 	}
 	// Called just before this Command runs the first time
 	@Override
-	protected void initialize() 
+	protected void initialize()
 	{
 		m_drive.resetEncoder();
 		m_revs = 0;
 		m_previousVal = 0;
 		m_currentVal = 0;
 	}
-	
+
 	// Called repeatedly when this Command is scheduled to run
 	@Override
-	protected void execute() 
+	protected void execute()
 	{
-		
+
 		m_currentVal = m_drive.getEncoder();
 
 		if( m_currentVal > (m_previousVal+m_maxVal/2))
@@ -65,11 +65,11 @@ public class DriveCommand extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
-	protected boolean isFinished() 
+	protected boolean isFinished()
 	{
 		double currentDistance =(m_revs + (double)m_currentVal/m_maxVal)* Math.PI*m_diameter;
 		SmartDashboard.putNumber("distance",currentDistance);
-		
+
 		if( Math.abs(m_distance) - Math.abs(currentDistance)  <= 0 )
 		{
 			System.out.println("command complete");
@@ -80,14 +80,15 @@ public class DriveCommand extends Command {
 
 	// Called once after isFinished returns true
 	@Override
-	protected void end() 
+	protected void end()
 	{
 		m_drive.arcadeDrive(0, 0);
 	}
-		
+
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	@Override
-	protected void interrupted() {
+	protected void interrupted()
+	{
 	}
 }

@@ -44,12 +44,12 @@ public class OI
 	{
 		return m_controller.getTriggerAxis(GenericHID.Hand.kLeft) < 0.5 ? false : true;
 	}
-	
+
 	public boolean getIntakeDAS()
 	{
 		return m_controller.getBButton();
 	}
-	
+
 	public boolean getHook()
 	{
 		return m_controller.getBumper(GenericHID.Hand.kLeft);
@@ -71,10 +71,10 @@ public class OI
 		{
 			ret_value = -0.1;
 		}
-		
+
 		return ret_value;
 	}
-	
+
 	public void rumble(double rumbleVal)
 	{
 		m_controller.setRumble(GenericHID.RumbleType.kLeftRumble , rumbleVal);
@@ -104,7 +104,7 @@ public class OI
 		{
 			ret_valueClimber = 1;
 		}
-		
+
 		return ret_valueClimber;
 	}
 	//// CREATING BUTTONS

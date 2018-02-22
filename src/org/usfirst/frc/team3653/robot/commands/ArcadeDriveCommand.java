@@ -10,7 +10,7 @@ public class ArcadeDriveCommand extends Command
 {
 	private OI m_oi = null;
 	private Drive m_drive = null;
-	
+
 	public ArcadeDriveCommand()
 	{
 		super( "Operator Control" );

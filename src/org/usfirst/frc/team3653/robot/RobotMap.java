@@ -22,26 +22,26 @@ public class RobotMap {
 	public static int pwmRightDriveMotor = 7;
 	public static int pwmIntakeMotor = 1;
 	public static int pwmClimbMotor = 2;
-	
+
 	public static SPI.Port spiGyroPort = SPI.Port.kOnboardCS0;
-	
+
 	public static int adcEncoderChannel = 0;
-	
+
 	public static int pcmCanCompressor = 2;
 	// vvv these are the transmissions for shifting gears for the drive vvv
 	public static int pcmCanShift = 1;
 	public static int pcmFCShift = 0; //forward channel
 	public static int pcmRCShift = 1; //reverse channel
-	
+
 	public static int pcmHook = 2; //for climbing
-	
+
 	public static int pcmCanIntakeArm = 1;
 	public static int pcmFCIntakeArm = 2; //forward channel
 	public static int pcmRCIntakeArm = 3; //reverse channel
-	
+
 	public static int dioElevatorUpper = 0;
 	public static int dioElevatorLower = 1;
-	
+
 	public static int canElevatorMotorMaster = 10;
 	public static int canElevatorMotorSlave = 9;
 }

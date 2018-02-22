@@ -56,7 +56,7 @@ public class Robot extends IterativeRobot {
 		m_positionChooser.addObject("Left", new Character('L'));
 		m_positionChooser.addDefault("Center", new Character('C'));
 		m_positionChooser.addObject("Right", new Character('R'));
-		
+
 		m_scaleChooser.addDefault("Safe", new Character('S'));
 		m_scaleChooser.addObject("Cross", new Character('C'));
 		m_compressor.setClosedLoopControl(true);
@@ -99,7 +99,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit()
 	{
-		
+
 		Character c = m_positionChooser.getSelected();
 		Character s = m_scaleChooser.getSelected();
 		autonomousCommand = new AutoCommand(
@@ -119,7 +119,7 @@ public class Robot extends IterativeRobot {
 	 * This function is called periodically during autonomous
 	 */
 	@Override
-	public void autonomousPeriodic() 
+	public void autonomousPeriodic()
 	{
 		Scheduler.getInstance().run();
 	}

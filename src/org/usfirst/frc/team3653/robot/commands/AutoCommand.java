@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class AutoCommand extends CommandGroup 
+public class AutoCommand extends CommandGroup
 {
 	// 'L', 'C', 'R'
 	private char m_position;
@@ -17,7 +17,7 @@ public class AutoCommand extends CommandGroup
 
 	// 'S' or 'C'
 	private char m_scaleAction;
-	public AutoCommand(char start_pos, char scaleAction,String fieldString) 
+	public AutoCommand(char start_pos, char scaleAction,String fieldString)
 	{
 		m_position = start_pos;
 		m_scaleAction = scaleAction;
@@ -30,7 +30,7 @@ public class AutoCommand extends CommandGroup
 		addSequential(new TurnCommand(30));
 		addSequential(new WaitCommand(5));
 		addSequential(new DriveCommand(2000));		*/
-		
+
 		if(m_position == 'C')
 		{
 			//starting in center. only option is switch
@@ -51,7 +51,7 @@ public class AutoCommand extends CommandGroup
 			placeScaleCross(m_position);
 		}
 	}
-	
+
 	private void placeSwitch(char turn)
 	{
 		// Values are temporary and aren't the real distances.
@@ -71,7 +71,7 @@ public class AutoCommand extends CommandGroup
 		addSequential(new TurnCommand(leftRight * (-30)));
 		addSequential(new DriveCommand(1 * 12));
 	}
-	
+
 	private void placeScaleEasy(char start)
 	{
 		/*
@@ -90,8 +90,8 @@ public class AutoCommand extends CommandGroup
 		addSequential(new DriveCommand(-1.5 * 12));
 		addParallel(new OutputCommand(1));
 		addSequential(new TurnCommand(leftRight * (90)));
-		
-		
+
+
 		addSequential(new DriveCommand(-1 * 12));
 		addSequential(new TurnCommand(leftRight * 30));
 		addSequential(new DriveCommand(1 * 12));
@@ -99,7 +99,7 @@ public class AutoCommand extends CommandGroup
 		addSequential(new DriveCommand(1 * 12));
 		// vroom vroom
 		 */
-		
+
 		/*
 		int leftRight = (turn == 'R') ? 1 : -1;
 		addSequential(new DriveCommand(1 * 12));
@@ -116,27 +116,27 @@ public class AutoCommand extends CommandGroup
 		addSequential(new TurnCommand(leftRight * (-30)));
 		addSequential(new DriveCommand(1 * 12));
 		 */
-		
+
 	}
-	
+
 	private void placeScaleCross(char start)
 	{
-		
+
 	}
-	
+
 	private void crossLine()
 	{
 		addSequential(new DriveCommand(5 * 12));
 	}
 	// Called just before this Command runs the first time
 	@Override
-	protected void initialize() 
+	protected void initialize()
 	{
 	}
-	
+
 	// Called repeatedly when this Command is scheduled to run
 	@Override
-	protected void execute() 
+	protected void execute()
 	{
 	}
 
