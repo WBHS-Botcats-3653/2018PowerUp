@@ -27,17 +27,25 @@ public class RobotMap {
 
 	public static int adcEncoderChannel = 0;
 
-	public static int pcmCanCompressor = 2;
+	public static int pcmCanCompressor = 1;
 	// vvv these are the transmissions for shifting gears for the drive vvv
 	public static int pcmCanShift = 1;
-	public static int pcmFCShift = 0; //forward channel
-	public static int pcmRCShift = 1; //reverse channel
+	public static int pcmFCShift = 1; //forward channel
+	public static int pcmRCShift = 6; //reverse channel
+	
+	public static int pcmFCWenchShift = 0;
+	public static int pcmRCWenchShift = 7;
+	
+	public static int pcmFCElevatorShift = 3;
+	public static int pcmRCElevatorShift = 4;
 
-	public static int pcmHook = 2; //for climbing
+	public static int pcmCanHook=2;
+	public static int pcmHookRC = 2; //for climbing
+	public static int pcmHookFC = 5;
 
-	public static int pcmCanIntakeArm = 1;
-	public static int pcmFCIntakeArm = 2; //forward channel
-	public static int pcmRCIntakeArm = 3; //reverse channel
+	public static int pcmCanIntakeArm = 2;
+	public static int pcmFCIntakeArm = 1; //forward channel
+	public static int pcmRCIntakeArm = 6; //reverse channel
 
 	public static int dioElevatorUpper = 0;
 	public static int dioElevatorLower = 1;

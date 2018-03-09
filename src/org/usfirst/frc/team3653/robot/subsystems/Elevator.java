@@ -4,6 +4,8 @@ import org.usfirst.frc.team3653.robot.RobotMap;
 import org.usfirst.frc.team3653.robot.commands.ArcadeLiftCommand;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -17,6 +19,7 @@ public class Elevator extends Subsystem
 	private static Elevator m_singleton = null;
 	private WPI_TalonSRX m_elevatorMotorMaster;
 	private WPI_TalonSRX m_elevatorMotorSlave;
+	private DoubleSolenoid m_transmition;
 	//private DigitalInput m_upperLimit;
 	//private DigitalInput m_lowerLimit;
 
@@ -32,6 +35,9 @@ public class Elevator extends Subsystem
 		m_elevatorMotorMaster.configSelectedFeedbackSensor(
 				com.ctre.phoenix.motorcontrol.FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
 		m_elevatorMotorMaster.setSensorPhase( true );
+		m_transmition = new DoubleSolenoid(RobotMap.pcmCanHook, RobotMap.pcmFCElevatorShift, RobotMap.pcmRCElevatorShift);
+		m_transmition.set(Value.kReverse);
+	
 	}
 
 	public void initDefaultCommand()
@@ -52,6 +58,15 @@ public class Elevator extends Subsystem
 		m_elevatorMotorMaster.set(speed);
 		SmartDashboard.putNumber( "Elevator Position", this.getPosition() );
 		return ret_val;
+	}
+	
+	public void shiftElevator(boolean disengage)
+	{
+		//m_transmition.set(up ? Value.kForward : Value.kReverse);
+		if(disengage)
+		{
+			m_transmition.set(Value.kForward);
+		}
 	}
 
 	public boolean isUpperLimit()

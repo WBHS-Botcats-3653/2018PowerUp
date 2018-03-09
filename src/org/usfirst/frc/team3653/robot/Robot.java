@@ -155,13 +155,21 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void testPeriodic()
 	{
-		if(m_elevator.isUpperLimit())
+		/*if(m_elevator.isUpperLimit())
 		{
 			System.out.println("its close");
 		}
 		else
 		{
 			System.out.println("far");
+		}*/
+		if(m_oi.getElevatorShift())
+		{
+			System.out.println("it works");
+		}
+		if(m_oi.getWenchShift())
+		{
+			System.out.println("it also works");
 		}
 		//LiveWindow.run();
 	}

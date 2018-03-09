@@ -33,6 +33,7 @@ public class ArcadeClimbCommand extends Command {
 	{
 		m_climber.dropHook(m_oi.getHook());
 		m_climber.climber(m_oi.getClimber());
+		m_climber.wenchShift(m_oi.getWenchShift());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

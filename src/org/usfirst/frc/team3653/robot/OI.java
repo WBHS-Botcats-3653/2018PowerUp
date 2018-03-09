@@ -2,6 +2,7 @@ package org.usfirst.frc.team3653.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 
 //import org.usfirst.frc.team3653.robot.subsystems.Drive;
 //import org.usfirst.frc.team3653.robot.commands.ExampleCommand;
@@ -14,10 +15,12 @@ public class OI
 {
 	private static OI m_singleton = null;
 	private XboxController m_controller = null;
+	private Joystick m_externalButtons = null;
 
 	private OI()
 	{
 		m_controller = new XboxController( 0 );
+		m_externalButtons = new Joystick(1);
 	}
 
 	public static OI getInstance()
@@ -45,6 +48,16 @@ public class OI
 		return m_controller.getTriggerAxis(GenericHID.Hand.kLeft) < 0.5 ? false : true;
 	}
 
+	public boolean getElevatorShift()
+	{
+		return m_externalButtons.getRawButton(1);
+	}
+	
+	public boolean getWenchShift()
+	{
+		return m_externalButtons.getRawButton(1);
+	}
+
 	public boolean getIntakeDAS()
 	{
 		return m_controller.getBButton();
@@ -69,7 +82,7 @@ public class OI
 		}
 		else if(m_controller.getBumper(GenericHID.Hand.kRight))
 		{
-			ret_value = -0.1;
+			ret_value = -0.14;
 		}
 
 		return ret_value;
@@ -100,7 +113,7 @@ public class OI
 	public double getClimber()
 	{
 		double ret_valueClimber = 0.0;
-		if(m_controller.getAButton())
+		if(m_controller.getAButton())//m_externalButtons.getRawButton(3));
 		{
 			ret_valueClimber = 1;
 		}

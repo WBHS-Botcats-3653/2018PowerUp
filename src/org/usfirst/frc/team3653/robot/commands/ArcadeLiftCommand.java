@@ -41,6 +41,7 @@ public class ArcadeLiftCommand extends Command
 		{
 			m_oi.rumble(0);
 		}
+		m_elevator.shiftElevator(m_oi.getElevatorShift());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
