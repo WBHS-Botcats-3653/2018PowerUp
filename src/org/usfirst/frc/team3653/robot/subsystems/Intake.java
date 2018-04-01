@@ -47,9 +47,21 @@ public class Intake extends Subsystem
 	}*/
 
 	public void deployAndStow(boolean up)
+	{
+		m_armCtrl.set(up ? Value.kReverse : Value.kForward);
+	}
+	
+	public void toggleDeployStow()
+	{
+		if(m_armCtrl.get() == Value.kReverse)
 		{
-			m_armCtrl.set(up ? Value.kReverse : Value.kForward);
+			m_armCtrl.set(Value.kForward);
 		}
+		else
+		{
+			m_armCtrl.set(Value.kReverse);
+		}
+	}
 
 	public void intake(double speed)
 	{

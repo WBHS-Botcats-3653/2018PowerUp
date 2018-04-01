@@ -7,7 +7,7 @@ import org.usfirst.frc.team3653.robot.subsystems.Drive;
  *
  */
 public class TurnCommand extends Command {
-	private final double m_turnSpeed = 0.5;
+	private final double m_turnSpeed = 0.6;
 	private final double m_angle;
 	private double m_startAngle;
 	private final Drive m_drive;
@@ -37,7 +37,7 @@ public class TurnCommand extends Command {
 	@Override
 	protected boolean isFinished()
 	{
-		return Math.abs(m_drive.getAngle() - m_startAngle) >= m_angle;
+		return Math.abs(m_drive.getAngle() - m_startAngle) >= Math.abs(m_angle);
 	}
 
 	// Called once after isFinished returns true

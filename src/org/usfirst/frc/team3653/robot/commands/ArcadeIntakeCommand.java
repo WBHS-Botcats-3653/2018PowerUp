@@ -29,7 +29,10 @@ public class ArcadeIntakeCommand extends Command
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute()
 	{
-		m_intake.deployAndStow(m_oi.getIntakeDAS());
+		if(m_oi.getIntakeDAS())
+		{
+			m_intake.toggleDeployStow();
+		}
 		m_intake.intake(m_oi.getIntake());
 	}
 

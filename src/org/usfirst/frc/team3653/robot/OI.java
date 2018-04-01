@@ -15,7 +15,7 @@ public class OI
 {
 	private static OI m_singleton = null;
 	private XboxController m_controller = null;
-	private Joystick m_externalButtons = null;
+	private Joystick m_externalButtons = null; 
 
 	private OI()
 	{
@@ -34,13 +34,13 @@ public class OI
 
 	public double getThrottle()
 	{
-		return m_controller.getY(GenericHID.Hand.kLeft);
+		return -m_controller.getY(GenericHID.Hand.kLeft);
 	}
 
 	public double getSteering()
 	{
 		//its negative because the getX was inverted
-		return -m_controller.getX(GenericHID.Hand.kRight);
+		return m_controller.getX(GenericHID.Hand.kRight);
 	}
 
 	public boolean getShift()
@@ -50,22 +50,22 @@ public class OI
 
 	public boolean getElevatorShift()
 	{
-		return m_externalButtons.getRawButton(1);
+		return m_externalButtons.getRawButton(3);
 	}
 	
 	public boolean getWenchShift()
 	{
-		return m_externalButtons.getRawButton(1);
+		return m_externalButtons.getRawButton(3);
 	}
 
 	public boolean getIntakeDAS()
 	{
-		return m_controller.getBButton();
+		return m_controller.getBButtonPressed();
 	}
 
 	public boolean getHook()
 	{
-		return m_controller.getBumper(GenericHID.Hand.kLeft);
+		return m_externalButtons.getRawButton(1);
 	}
 
 	public double getLift()
@@ -113,7 +113,7 @@ public class OI
 	public double getClimber()
 	{
 		double ret_valueClimber = 0.0;
-		if(m_controller.getAButton())//m_externalButtons.getRawButton(3));
+		if(m_externalButtons.getRawButton(3))//m_externalButtons.getRawButton(3));
 		{
 			ret_valueClimber = 1;
 		}

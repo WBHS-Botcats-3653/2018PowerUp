@@ -26,19 +26,23 @@ public class OutputCommand extends Command {
     // Called just before this Command runs the first time
     protected void initialize()
     {
+    	m_intake.deployAndStow( false );
     	m_timer.start();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute()
     {
-    	m_intake.intake(1.0);
+    	if (m_timer.get() > 1)
+    	{
+    		m_intake.intake(1.0);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished()
     {
-    	return m_timer.get() > m_duration;
+    	return m_timer.get() > (1+m_duration);
     }
 
     // Called once after isFinished returns true

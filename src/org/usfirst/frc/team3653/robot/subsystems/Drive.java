@@ -37,8 +37,8 @@ public class Drive extends Subsystem
 	{
 		m_rightDrive = new VictorSP(RobotMap.pwmRightDriveMotor);
 		m_leftDrive = new VictorSP(RobotMap.pwmLeftDriveMotor);
-		m_rightDrive.setInverted(true);
-		m_leftDrive.setInverted(true);
+		//m_rightDrive.setInverted(true);
+		//m_leftDrive.setInverted(true);
 		m_drive = new DifferentialDrive(m_leftDrive, m_rightDrive);
 		m_gyro = new ADXRS450_Gyro(RobotMap.spiGyroPort);
 		m_transmition = new DoubleSolenoid(RobotMap.pcmCanShift, RobotMap.pcmFCShift, RobotMap.pcmRCShift);

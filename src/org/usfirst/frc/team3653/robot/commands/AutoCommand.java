@@ -25,7 +25,7 @@ public class AutoCommand extends CommandGroup
 		m_scale = fieldString.charAt(1);
 		m_theirSwitch = fieldString.charAt(2);
 
-		addSequential(new DriveCommand(-5*12));
+		//addSequential(new DriveCommand(10*12));
 		/*
 		addSequential(new TurnCommand(30));
 		addSequential(new WaitCommand(5));
@@ -34,89 +34,57 @@ public class AutoCommand extends CommandGroup
 		if(m_position == 'C')
 		{
 			//starting in center. only option is switch
-			placeSwitch(m_mySwitch);
-		}
-		else if(m_position == m_scale)
-		{
-			//means scale is on our starting side
-			placeScaleEasy(m_position);
+			placeSwitchCenter(m_mySwitch);
 		}
 		else if(m_scaleAction == 'S')
 		{
 			//this is if we want to plat it safe and not cross the feild for scale
 			crossLine();
 		}
+		else if(m_position ==  m_mySwitch)
+		{
+			//means scale is on our starting side
+			placeSwitchSide(m_position);
+		}
 		else
 		{
-			placeScaleCross(m_position);
+			crossLine();
 		}
 	}
 
-	private void placeSwitch(char turn)
+	private void placeSwitchCenter(char turn)
 	{
 		// Values are temporary and aren't the real distances.
+		System.out.println("place switch");
 		int leftRight = (turn == 'R') ? 1 : -1;
 		// needes some kind of output system lowerer(the numatics)
-		addSequential(new DriveCommand(1 * 12));
-		addSequential(new TurnCommand(leftRight * 30));
-		addSequential(new DriveCommand(1 * 12));
-		addSequential(new TurnCommand(leftRight * (-30)));
-		addSequential(new DriveCommand(1 * 12));
+		addSequential(new DriveCommand(2 * 12));
+		addSequential(new TurnCommand(leftRight * 60));
+		addSequential(new DriveCommand(3 * 12));
+		addSequential(new TurnCommand(leftRight * (-60)));
+		addSequential(new DriveCommand(2 * 12));
 		addSequential(new LiftCommand(2 * 12));
+		addSequential(new WaitCommand(1));
 		// some sort of elevator up (done ... maybe)
 		addSequential(new OutputCommand(1));
+		/*addSequential(new WaitCommand(1));
 		addSequential(new DriveCommand(-1 * 12));
 		addSequential(new TurnCommand(leftRight * 30));
-		addSequential(new DriveCommand(1 * 12));
+		addSequential(new DriveCommand(2 * 12));
 		addSequential(new TurnCommand(leftRight * (-30)));
-		addSequential(new DriveCommand(1 * 12));
+		addSequential(new DriveCommand(1 * 12));*/
 	}
 
-	private void placeScaleEasy(char start)
+	private void placeSwitchSide(char start)
 	{
-		/*
-		int leftRight = (turn == 'R') ? 1 : -1;
-		addSequential(new DriveCommand(1.5 * 12));
-		addSequential(new TurnCommand(leftRight * 45));
-		addSequential(new DriveCommand(2 * 12));
-		addSequential(new TurnCommand(leftRight * (-45)));
-		addSequential(new DriveCommand(8 * 12));
-		addSequential(new TurnCommand(leftRight * (-45)));
-		addSequential(new DriveCommand(1 * 12));
-		addSequential(new TurnCommand(leftRight * (-45)));
-		addSequential(new LiftCommand(6 * 12));
-		// some sort of elevator up (done ... maybe)
-		addSequential(new OutputCommand(1));
-		addSequential(new DriveCommand(-1.5 * 12));
-		addParallel(new OutputCommand(1));
-		addSequential(new TurnCommand(leftRight * (90)));
-
-
-		addSequential(new DriveCommand(-1 * 12));
-		addSequential(new TurnCommand(leftRight * 30));
-		addSequential(new DriveCommand(1 * 12));
-		addSequential(new TurnCommand(leftRight * (-30)));
-		addSequential(new DriveCommand(1 * 12));
-		// vroom vroom
-		 */
-
-		/*
-		int leftRight = (turn == 'R') ? 1 : -1;
-		addSequential(new DriveCommand(1 * 12));
-		addSequential(new TurnCommand(leftRight * 30));
-		addSequential(new DriveCommand(1 * 12));
-		addSequential(new TurnCommand(leftRight * (-30)));
+		int leftRight = (start == 'R') ? -1 : 1;
+		addSequential(new DriveCommand(13 * 12));
+		addSequential(new TurnCommand(leftRight * 90));
 		addSequential(new DriveCommand(1 * 12));
 		addSequential(new LiftCommand(2 * 12));
-		// some sort of elevator up (done ... maybe)
+		addSequential(new WaitCommand(1));
 		addSequential(new OutputCommand(1));
-		addSequential(new DriveCommand(-1 * 12));
-		addSequential(new TurnCommand(leftRight * 30));
-		addSequential(new DriveCommand(1 * 12));
-		addSequential(new TurnCommand(leftRight * (-30)));
-		addSequential(new DriveCommand(1 * 12));
-		 */
-
+		
 	}
 
 	private void placeScaleCross(char start)
@@ -126,7 +94,7 @@ public class AutoCommand extends CommandGroup
 
 	private void crossLine()
 	{
-		addSequential(new DriveCommand(5 * 12));
+		addSequential(new DriveCommand(12 * 12));
 	}
 	// Called just before this Command runs the first time
 	@Override
